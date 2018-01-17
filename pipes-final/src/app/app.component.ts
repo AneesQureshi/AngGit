@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import{ServerService} from './server.service';
+import{Response} from '@angular/http';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -45,12 +46,49 @@ export class AppComponent {
       'list-group-item-danger': server.status === 'critical'
     };
   }
-  onAddServer() {
+  onAddServer(name:string) {
     this.servers.push({
       instanceType: 'small',
-      name: 'New Server',
+      name: name,
       status: 'stable',
       started: new Date(15, 1, 2017)
     });
+      }
+  constructor(private serverService : ServerService){}
+
+  onSave(){
+    this.serverService.storeServers(this.servers).subscribe(
+      (response)=>console.log(response),
+      (error)=>console.log(error)
+    );
   }
+
+  // without data 
+  // onGet(){
+  //   this.serverService.getServers().subscribe(
+  //     (response)=>console.log(response),
+  //     (error)=>console.log(error)
+  //   );
+
+  //with data in response
+//   onGet(){
+//     this.serverService.getServers().subscribe(
+//       (response :Response)=>{
+// const data =response.json(); 
+// console.log(data);
+//       },
+//       (error)=>console.log(error)
+//     );
+//   }
+
+// with data retrieve on service page
+
+onGet(){
+  this.serverService.getServers().subscribe(
+    (servers:any[])=>console.log(servers),
+    (error)=>console.log(error)
+  );
 }
+
+}
+ 
