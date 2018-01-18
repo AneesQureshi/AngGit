@@ -1,18 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import{ServerService} from './server.service';
 import{Response} from '@angular/http';
+import * as firebase from 'firebase';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   data1;
   appStatus = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve('stable');
     }, 2000);
   });
+
+  ngOnInit(){
+    firebase.initializeApp({
+      apiKey: "AIzaSyApV0_Sc_qkeGleYcNDfwLk2Wq_rdjf1v8",
+      authDomain: "minehttpdemo.firebaseapp.com"
+    });
+  }
   servers = [
     {
       instanceType: 'medium',
