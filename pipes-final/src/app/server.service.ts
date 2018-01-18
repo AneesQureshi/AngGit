@@ -15,7 +15,8 @@ getServers(){
     return this.http.get('https://minehttpdemo.firebaseio.com/data.json').map(
         (respose:Response)=>{
             const data =respose.json();
-            return data;
+            return data["-L37weq0g3fvxW3ZcHps"];
+
         }
     );
 

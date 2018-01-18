@@ -7,6 +7,7 @@ import{Response} from '@angular/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  data1;
   appStatus = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve('stable');
@@ -63,18 +64,20 @@ export class AppComponent {
     );
   }
 
-  // without data 
-  // onGet(){
-  //   this.serverService.getServers().subscribe(
-  //     (response)=>console.log(response),
-  //     (error)=>console.log(error)
-  //   );
+//  without data 
+//   onGet(){
+//     this.serverService.getServers().subscribe(
+//       (response)=>console.log(response),
+//       (error)=>console.log(error)
+//     );
+// }
 
   //with data in response
 //   onGet(){
 //     this.serverService.getServers().subscribe(
 //       (response :Response)=>{
-// const data =response.json(); 
+// const data =response; 
+// // console.log("data="+data[0])
 // console.log(data);
 //       },
 //       (error)=>console.log(error)
@@ -85,8 +88,12 @@ export class AppComponent {
 
 onGet(){
   this.serverService.getServers().subscribe(
-    (servers:any[])=>console.log(servers),
-    (error)=>console.log(error)
+    (response:Response)=>{this.data1=response;
+
+  }
+    // (servers:any[])=>console.log(servers),
+    // (error)=>console.log(error)
+    
   );
 }
 
